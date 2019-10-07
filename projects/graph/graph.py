@@ -109,7 +109,39 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        qq = Queue()
+        visited_nodes = set()
+
+        # We are going to store paths instead of single nodes in the queue for this one.
+        # Starting vertex is stored as a list instead of a single value so we can add to it
+        qq.enqueue([starting_vertex])
+        while qq.size() > 0:
+
+            # Take the route out, and the last vertex in the route
+            route = qq.dequeue()
+            vertex = route[-1]
+
+            # If we haven't been to the last vertex yet, great! Lets take a look at it.
+            if vertex not in visited_nodes:
+
+                # If the last vertex in our route is the destination_vertex (the node we are looking for), we simply return the route.
+                if vertex is destination_vertex:
+                    return route
+
+                # Otherwise, we need to keep looking for our destination.
+                else:
+
+                    # Add the vertex to the visited set, so we don't check it twice
+                    visited_nodes.add(vertex)
+
+                    # And then take all of its neighbors (specifically the connections to those neighbors),
+                    # and create a copy of our route with each of those connections added
+                    # This way we enqueue all possible routes from the current node, to the next nodes in our graph.
+                    for edge in self.vertices[vertex]:
+                        route_copy = route.copy()
+                        route_copy.append(edge)
+                        qq.enqueue(route_copy)
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
