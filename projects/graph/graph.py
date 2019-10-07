@@ -148,7 +148,28 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+
+        # This one has a very similar setup to the BFS implementation so I won't notate it as well.
+        # The real difference is in which nodes we choose to visit next -- based on popping from the stack versus dequeuing from a queue
+        # but as far as implementation goes, they are virtually identical.
+        depth_search_stack = Stack()
+        visited_nodes = set()
+
+        depth_search_stack.push([starting_vertex])
+
+        while depth_search_stack.size() > 0:
+            route = depth_search_stack.pop()
+            vertex = route[-1]
+
+            if vertex not in visited_nodes:
+                if vertex is destination_vertex:
+                    return route
+                visited_nodes.add(vertex)
+                for edge in self.vertices[vertex]:
+                    route_copy = route.copy()
+                    route_copy.append(edge)
+                    depth_search_stack.push(route_copy)
+
 
 
 
