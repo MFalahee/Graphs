@@ -42,7 +42,6 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        print("Breadth First Transversal of the graph: ")
         qq = Queue()
         visited = set()
 
@@ -73,7 +72,6 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        print("Depth-first traversal of the graph: ")
         ss = Stack()
         visited = set()
 
@@ -209,6 +207,7 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
+    print("Depth-first traversal of the graph: ")
     graph.dft(1)
 
     '''
@@ -226,6 +225,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
+    print("Breadth First Transversal of the graph: ")
     graph.bft(1)
 
     '''
