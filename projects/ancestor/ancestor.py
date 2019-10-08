@@ -1,24 +1,7 @@
 from util import Stack, Queue  # These may come in handy
+ 
 
-#    def dfs(self, starting_vertex, destination_vertex):
 
-#         depth_search_stack = Stack()
-#         visited_nodes = set()
-
-#         depth_search_stack.push([starting_vertex])
-
-#         while depth_search_stack.size() > 0:
-#             route = depth_search_stack.pop()
-#             vertex = route[-1]
-
-#             if vertex not in visited_nodes:
-#                 if vertex is destination_vertex:
-#                     return route
-#                 visited_nodes.add(vertex)
-#                 for edge in self.vertices[vertex]:
-#                     route_copy = route.copy()
-#                     route_copy.append(edge)
-#                     depth_search_stack.push(route_copy)
 
 def get_ancestors(ancestors, node):
     ancestor_nodes = []
