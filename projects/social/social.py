@@ -51,17 +51,39 @@ class SocialGraph:
             self.addUser(i)
 
         # Create friendships
-        possible_friends = []
-        for user in range(1, numUsers + 1):
-            for friend in range(1, numUsers + 1):
-                if user is not friend and (friend, user) not in possible_friends:
-                    possible_friends.append((user, friend))
 
-        random.shuffle(possible_friends)
-        total_friendships = avgFriendships * (numUsers//2)
+        # O(n^2) time solution
+        # possible_friends = []
 
-        for num in range(total_friendships):
-            self.addFriendship(possible_friends[num][0], possible_friends[num][1])
+        # for user in range(1, numUsers + 1):
+        #     for friend in range(1, numUsers + 1):
+        #         if user is not friend and (friend, user) not in possible_friends:
+        #             possible_friends.append((user, friend))
+
+        # random.shuffle(possible_friends)
+        # total_friendships = avgFriendships * (numUsers//2)
+
+        # for num in range(total_friendships):
+        #     self.addFriendship(possible_friends[num][0], possible_friends[num][1])
+
+        # O(n)
+        friendships_made = 0
+        
+        while friendships_made // numUsers != avgFriendships:
+            i = random.randint(1, numUsers)
+            j = random.randint(1, numUsers)
+
+            while i is j:
+                j = random.randint(1, numUsers)
+
+            user = min(i, j)
+            friend = max(i, j)
+
+            if friend not in self.friendships[user]:
+                self.addFriendship(user, friend)
+                friendships_made += 2
+
+        
 
     def bfs(self, starting_vertex, visited):
        
@@ -97,7 +119,17 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populateGraph(10, 2)
-    print(sg.friendships)
+    sg.populateGraph(1000, 5)
+    # print(sg.friendships)
     connections = sg.getAllSocialPaths(1)
+    
     print(connections)
+
+    # Degrees of separation tests:
+
+    # print("Total # of connections", len(connections))
+    # total_len = 0
+    # for i in connections:
+    #     total_len += len(connections[i])
+    # print("total length of paths", total_len)
+    # print("Average degree of separation:", total_len / len(connections))
